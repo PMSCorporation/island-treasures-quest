@@ -1,41 +1,116 @@
-const missions = [
-  { eyebrow:"YOUR FIRST STOP", title:"The first hidden location", description:"Tomorrow, this card will show the first real business, its landmark photo and the shortest walking directions.", code:"MAYA" },
-  { eyebrow:"SECRET FOUND · NEXT STOP", title:"Follow the tropical clue", description:"The first word was correct. A new location is now unlocked—look for the second participating business.", code:"COZUMEL" },
-  { eyebrow:"FINAL STOP", title:"One last secret remains", description:"Reach the third location, find its secret word and unlock your Island Treasures reward.", code:"TREASURE" }
-];
-let step = Number(localStorage.getItem("itQuestStep") || 0);
+const screens = [...document.querySelectorAll('.screen')];
 const $ = id => document.getElementById(id);
-const welcome = $("welcome"), quest = $("quest"), complete = $("complete");
+let timerHandle;
+let secondsLeft = 600;
+let questStep = 0;
 
-function show(target) {
-  [welcome,quest,complete].forEach(el=>el.classList.add("hidden"));
-  target.classList.remove("hidden");
-  window.scrollTo({top:0,behavior:"smooth"});
+const missions = [
+  {
+    eyebrow: 'FOLLOW THE HIDDEN PASSAGE',
+    title: 'Cross through Diamonds',
+    copy: 'Continue through the store and take the elevator down to the souvenir shop.',
+    destination: 'Souvenir shop · downstairs',
+    code: 'SHELL'
+  },
+  {
+    eyebrow: 'YOUR FINAL DESTINATION',
+    title: 'Find Island Treasures',
+    copy: 'Return by the stairs, exit the store and look directly ahead for Island Treasures.',
+    destination: 'Island Treasures · across the plaza',
+    code: 'ISLAND'
+  }
+];
+
+function show(id) {
+  screens.forEach(screen => screen.classList.toggle('active', screen.id === id));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const statuses = {
+    welcome: 'Guest Wi-Fi', online: 'Connected · 10 min', expired: 'Access paused',
+    unlocked: 'Connected · 60 min', declined: 'Connected · 60 min', quest: 'Connected · Mission active', reward: 'Connected · Reward unlocked'
+  };
+  $('networkStatus').textContent = statuses[id] || 'Guest Wi-Fi';
 }
+
+function updateTimer() {
+  const m = Math.floor(secondsLeft / 60);
+  const s = secondsLeft % 60;
+  $('timerMinutes').textContent = String(m).padStart(2, '0');
+  $('timerSeconds').textContent = String(s).padStart(2, '0');
+}
+
+function startTimer() {
+  clearInterval(timerHandle);
+  secondsLeft = 600;
+  updateTimer();
+  show('online');
+  // Accelerated prototype: one displayed minute passes every six real seconds.
+  timerHandle = setInterval(() => {
+    secondsLeft = Math.max(0, secondsLeft - 10);
+    updateTimer();
+    if (secondsLeft === 0) expireSession();
+  }, 1000);
+}
+
+function expireSession() {
+  clearInterval(timerHandle);
+  show('expired');
+}
+
 function renderMission() {
-  if (step >= missions.length) return show(complete);
-  const m = missions[step];
-  $("missionNumber").textContent = String(step+1).padStart(2,"0");
-  $("missionEyebrow").textContent = m.eyebrow;
-  $("missionTitle").textContent = m.title;
-  $("missionDescription").textContent = m.description;
-  $("progressLabel").textContent = `STOP ${step+1} OF ${missions.length}`;
-  $("progressPercent").textContent = `${Math.round(step/missions.length*100)}%`;
-  $("progressBar").style.width = `${step/missions.length*100}%`;
-  $("hint").innerHTML = `Demo code: <strong>${m.code}</strong>`;
-  $("secretCode").value = "";
-  $("message").textContent = "";
-  show(quest);
+  if (questStep >= missions.length) {
+    $('rewardCode').textContent = `IT-${Math.floor(1000 + Math.random() * 9000)}`;
+    return show('reward');
+  }
+  const mission = missions[questStep];
+  $('questStepLabel').textContent = `MISSION ${questStep + 1} OF ${missions.length}`;
+  $('questProgress').style.width = `${((questStep + 1) / missions.length) * 100}%`;
+  $('missionBadge').textContent = `STOP ${questStep + 1}`;
+  $('missionEyebrow').textContent = mission.eyebrow;
+  $('missionTitle').textContent = mission.title;
+  $('missionCopy').textContent = mission.copy;
+  $('missionDestination').textContent = mission.destination;
+  $('missionHint').innerHTML = `Prototype code: <strong>${mission.code}</strong>`;
+  $('missionCode').value = '';
+  $('missionMessage').textContent = '';
+  show('quest');
 }
-$("startButton").addEventListener("click",()=>{ step=0; localStorage.setItem("itQuestStep",step); renderMission(); });
-$("codeForm").addEventListener("submit",event=>{
-  event.preventDefault();
-  const entered=$("secretCode").value.trim().toUpperCase();
-  if (entered !== missions[step].code) { $("message").textContent="That word does not open this lock. Try again."; return; }
-  $("message").textContent="Correct! Your next destination is unlocked.";
-  setTimeout(()=>{ step++; localStorage.setItem("itQuestStep",step); renderMission(); },700);
+
+$('connectButton').addEventListener('click', () => {
+  if (!$('terms').checked) return alert('Please accept the guest Wi-Fi terms.');
+  startTimer();
 });
-function reset(){ step=0; localStorage.removeItem("itQuestStep"); show(welcome); }
-$("resetButton").addEventListener("click",reset);
-$("againButton").addEventListener("click",reset);
-if (step>0) renderMission();
+$('expireButton').addEventListener('click', expireSession);
+$('wifiCodeForm').addEventListener('submit', event => {
+  event.preventDefault();
+  const code = $('wifiCode').value.trim().toUpperCase();
+  if (code !== 'ISLAND') {
+    $('wifiCodeMessage').textContent = 'That code is not valid. Ask the Island Treasures team for today’s code.';
+    return;
+  }
+  $('wifiCodeMessage').textContent = 'Correct — 60 minutes unlocked!';
+  setTimeout(() => show('unlocked'), 650);
+});
+$('acceptQuest').addEventListener('click', () => { questStep = 0; renderMission(); });
+$('declineQuest').addEventListener('click', () => show('declined'));
+$('changeMind').addEventListener('click', () => { questStep = 0; renderMission(); });
+$('missionForm').addEventListener('submit', event => {
+  event.preventDefault();
+  const code = $('missionCode').value.trim().toUpperCase();
+  if (code !== missions[questStep].code) {
+    $('missionMessage').textContent = 'That is not the treasure code for this stop. Try again.';
+    return;
+  }
+  $('missionMessage').textContent = 'Correct! The next destination is unlocked.';
+  setTimeout(() => { questStep += 1; renderMission(); }, 650);
+});
+function reset() {
+  clearInterval(timerHandle);
+  secondsLeft = 600;
+  questStep = 0;
+  $('wifiCode').value = '';
+  $('wifiCodeMessage').textContent = '';
+  show('welcome');
+}
+$('resetButton').addEventListener('click', reset);
+$('finishButton').addEventListener('click', reset);
+show('welcome');

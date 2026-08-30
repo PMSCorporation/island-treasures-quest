@@ -1,0 +1,6 @@
+.unlocked-promo{position:relative;margin:24px 0 14px;border-radius:24px;overflow:hidden;box-shadow:0 15px 34px #69481035}
+.unlocked-promo img{display:block;width:100%;height:245px;object-fit:cover;object-position:center 61%}
+.unlocked-promo:after{content:"";position:absolute;inset:38% 0 0;background:linear-gradient(transparent,#073b43e8)}
+.unlocked-promo>div{position:absolute;z-index:2;left:18px;right:18px;bottom:17px;display:flex;flex-direction:column;text-align:left;color:#fff}
+.unlocked-promo strong{font-size:17px;letter-spacing:.07em}
+.unlocked-promo span{margin-top:3px;color:#dff5f1;font-size:11px}

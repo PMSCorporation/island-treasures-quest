@@ -1,28 +1,12 @@
-# Island Treasures Quest — prototipo
+# Island Treasures Wi-Fi Quest — Prototype 2
 
-Prototipo móvil de la búsqueda del tesoro para Plaza Punta Langosta.
+Interactive mobile prototype of the revised customer flow:
 
-## Probarlo
+1. Ten-minute free guest Wi-Fi session.
+2. Session-expired state and 1½-minute shortcut through Diamonds International to Island Treasures.
+3. Demo Wi-Fi code `ISLAND`, obtained at Island Treasures, unlocks 60 minutes.
+4. Optional treasure quest or continue directly to Wi-Fi.
+5. Demo mission codes `SHELL` and `ISLAND`.
+6. Live-style souvenir claim screen.
 
-Abre `index.html` en un navegador. Las claves de demostración aparecen dentro de cada misión:
-
-1. `MAYA`
-2. `COZUMEL`
-3. `TREASURE`
-
-## Publicarlo en GitHub Pages
-
-1. Crea un repositorio nuevo.
-2. Sube `index.html`, `styles.css`, `app.js` y la carpeta `assets` a la raíz.
-3. En **Settings → Pages**, selecciona la rama principal y la carpeta raíz.
-
-No requiere servidor, base de datos ni instalación de dependencias.
-
-## Pendiente después de la visita
-
-- Nombres y orden de los tres locales.
-- Fotografías y referencias visuales de cada estación.
-- Mapa real del recorrido.
-- Claves definitivas y frecuencia de rotación.
-- Premio final y reglas de canje.
-- Idioma final y textos aprobados.
+The map and location photographs are placeholders until the site-visit assets are supplied.

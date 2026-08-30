@@ -1,0 +1,24 @@
+.mini-map.real-layout{height:auto;background:#75cee1;overflow:hidden;border:1px solid #a7d8d7}
+.real-layout svg{display:block;width:100%;height:auto}
+.real-layout .water{fill:#73cde0}
+.real-layout .land{fill:#f4e8ca;stroke:#ddcda8;stroke-width:2}
+.real-layout .pier{fill:none;stroke:#eaf1ee;stroke-width:11;stroke-linecap:round}
+.real-layout .bridge{fill:none;stroke:#f7cf45;stroke-width:15;stroke-linecap:round;opacity:.92}
+.real-layout .security{fill:#d5e6df;stroke:#fff;stroke-width:2}
+.real-layout .maps{fill:#fffdf2;stroke:#0b7e89;stroke-width:3}
+.real-layout .plaza{fill:#fff8e8;stroke:#d8c7a7;stroke-width:2}
+.real-layout .diamonds{fill:#75c96f;stroke:#287c43;stroke-width:3}
+.real-layout .island{fill:#ef6d72;stroke:#a73e4b;stroke-width:3}
+.real-layout .route-shadow{fill:none;stroke:#fff;stroke-width:12;stroke-linecap:round;stroke-linejoin:round}
+.real-layout .route{fill:none;stroke:#073b43;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:7 5}
+.real-layout .start-dot{fill:#087f8c;stroke:#fff;stroke-width:3}
+.real-layout .finish-dot{fill:#f2b84b;stroke:#fff;stroke-width:3}
+.real-layout .map-text{fill:#31565b;font:800 8px Inter,system-ui,sans-serif;letter-spacing:.08em}
+.real-layout .store-text{fill:#164d2d;font:950 8px Inter,system-ui,sans-serif;letter-spacing:.07em}
+.real-layout .island-text{fill:#fff;font:950 7px Inter,system-ui,sans-serif;letter-spacing:.03em}
+.real-layout .you-text{fill:#073b43;font:950 7px Inter,system-ui,sans-serif}
+.map-legend{display:flex;gap:10px;padding:10px 12px;background:#fff;color:#526b70;font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+.map-legend span{display:flex;align-items:center;gap:5px;flex:1}
+.map-legend i{width:13px;height:5px;border-radius:6px;display:inline-block}
+.legend-route{background:#073b43}
+.legend-store{background:#75c96f}
