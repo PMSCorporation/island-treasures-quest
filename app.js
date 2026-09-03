@@ -6,9 +6,9 @@ let questStep = 0;
 
 const missions = [
   {
-    eyebrow: 'YOUR TREASURE HUNT STARTS HERE',
-    title: 'Start at Island Treasures',
-    copy: 'Ask the Island Treasures team for the first secret code to begin your treasure hunt.',
+    eyebrow: 'YOU ARE ALREADY AT THE FIRST STOP',
+    title: 'Get your first clue at Island Treasures',
+    copy: 'You are already here. Ask the Island Treasures team for the first secret code, then continue to Diamonds International.',
     destination: 'Island Treasures',
     code: 'ISLAND'
   },
