@@ -7,24 +7,24 @@ let questStep = 0;
 const missions = [
   {
     eyebrow: 'YOU ARE ALREADY AT THE FIRST STOP',
-    title: 'Get your first clue at Island Treasures',
-    copy: 'You are already here. Ask the Island Treasures team for the first secret code, then continue to Diamonds International.',
-    destination: 'Island Treasures',
-    code: 'ISLAND'
+    title: 'Return to the Island Treasures cashier',
+    copy: 'Ask the cashier for the new Treasure Quest code. This is different from the Wi-Fi code you just entered.',
+    destination: 'Island Treasures · cashier',
+    code: 'TEMPLE'
   },
   {
     eyebrow: 'THE NEXT CLUE IS INSIDE',
     title: 'Continue to Diamonds International',
-    copy: 'Enter Diamonds International and follow the route through the store to find the second secret code.',
+    copy: 'Go to Diamonds International and ask for the second Treasure Quest code. Enter it here to unlock your final destination.',
     destination: 'Diamonds International',
     code: 'DIAMOND'
   },
   {
     eyebrow: 'FINAL STOP · CLAIM YOUR PRIZE',
-    title: 'Finish at the souvenir shop',
-    copy: 'Go downstairs to the souvenir shop, find the final code and show the completed screen to receive your free souvenir.',
-    destination: 'Souvenir shop · downstairs',
-    code: 'TREASURE'
+    title: 'Take the elevator to Island Woody',
+    copy: 'Inside Diamonds, take the elevator downstairs to Island Woody. Ask for the final code, enter it here and show the completed screen to receive your free souvenir.',
+    destination: 'Island Woody · downstairs',
+    code: 'WOODY'
   }
 ];
 
