@@ -6,18 +6,25 @@ let questStep = 0;
 
 const missions = [
   {
-    eyebrow: 'FOLLOW THE HIDDEN PASSAGE',
-    title: 'Cross through Diamonds',
-    copy: 'Continue through the store and take the elevator down to the souvenir shop.',
-    destination: 'Souvenir shop · downstairs',
-    code: 'SHELL'
+    eyebrow: 'YOUR TREASURE HUNT STARTS HERE',
+    title: 'Start at Island Treasures',
+    copy: 'Ask the Island Treasures team for the first secret code to begin your treasure hunt.',
+    destination: 'Island Treasures',
+    code: 'ISLAND'
   },
   {
-    eyebrow: 'YOUR FINAL DESTINATION',
-    title: 'Find Island Treasures',
-    copy: 'Return by the stairs, exit the store and look directly ahead for Island Treasures.',
-    destination: 'Island Treasures · across the plaza',
-    code: 'ISLAND'
+    eyebrow: 'THE NEXT CLUE IS INSIDE',
+    title: 'Continue to Diamonds International',
+    copy: 'Enter Diamonds International and follow the route through the store to find the second secret code.',
+    destination: 'Diamonds International',
+    code: 'DIAMOND'
+  },
+  {
+    eyebrow: 'FINAL STOP · CLAIM YOUR PRIZE',
+    title: 'Finish at the souvenir shop',
+    copy: 'Go downstairs to the souvenir shop, find the final code and show the completed screen to receive your free souvenir.',
+    destination: 'Souvenir shop · downstairs',
+    code: 'TREASURE'
   }
 ];
 

@@ -106,7 +106,7 @@
       </div>
       <div class="reward-preview">
         <div class="coin">★</div>
-        <div><span>OPTIONAL TREASURE QUEST</span><strong>Complete 2 quick stops</strong><small>Show the final screen to claim your souvenir.</small></div>
+        <div><span>OPTIONAL TREASURE QUEST</span><strong>Complete 3 quick stops</strong><small>Start here, continue through Diamonds and finish where you claim your souvenir.</small></div>
       </div>
       <button id="acceptQuest" class="primary">Yes, start the mission <b>→</b></button>
       <button id="declineQuest" class="quiet">No thanks, continue to Wi-Fi</button>
@@ -120,19 +120,19 @@
     </section>
 
     <section id="quest" class="screen quest">
-      <div class="quest-progress"><span id="questStepLabel">MISSION 1 OF 2</span><div><i id="questProgress"></i></div></div>
+      <div class="quest-progress"><span id="questStepLabel">MISSION 1 OF 3</span><div><i id="questProgress"></i></div></div>
       <article class="mission-card">
         <span id="missionBadge" class="mission-badge">STOP 1</span>
-        <p class="eyebrow" id="missionEyebrow">FOLLOW THE HIDDEN PASSAGE</p>
-        <h2 id="missionTitle">Cross through Diamonds</h2>
-        <p id="missionCopy">Continue through the store and take the elevator down to the souvenir shop.</p>
+        <p class="eyebrow" id="missionEyebrow">YOUR TREASURE HUNT STARTS HERE</p>
+        <h2 id="missionTitle">Start at Island Treasures</h2>
+        <p id="missionCopy">Ask the Island Treasures team for the first secret code to begin your treasure hunt.</p>
         <div class="photo-slot"><span>REAL LOCATION PHOTO</span><small>Your photo will replace this placeholder</small></div>
-        <div class="mission-route"><span>Current stop</span><b id="missionDestination">Souvenir shop · downstairs</b><em>≈ 2 min walk</em></div>
+        <div class="mission-route"><span>Current stop</span><b id="missionDestination">Island Treasures</b><em>3 quick stops</em></div>
       </article>
       <form id="missionForm" class="code-card dark">
         <label for="missionCode">Enter the secret code at this stop</label>
         <div><input id="missionCode" autocomplete="off" autocapitalize="characters" placeholder="SECRET CODE" /><button type="submit">Check</button></div>
-        <p id="missionHint">Prototype code: <strong>SHELL</strong></p>
+        <p id="missionHint">Prototype code: <strong>ISLAND</strong></p>
         <p id="missionMessage" class="form-message" role="status"></p>
       </form>
     </section>
