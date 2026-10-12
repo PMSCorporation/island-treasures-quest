@@ -4,18 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#075f68" />
-  <meta name="description" content="Island Treasures Free Wi-Fi and Treasure Quest prototype" />
-  <title>Island Treasures Free Wi-Fi</title>
+  <meta name="description" content="Island Treasures complimentary Wi-Fi and Treasure Quest at Punta Langosta, Cozumel." />
+  <title>Island Treasures · Free Wi-Fi</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="map.css" />
   <link rel="stylesheet" href="teaser.css" />
+  <link rel="stylesheet" href="production.css" />
 </head>
 <body>
   <main class="phone-shell">
     <header class="topbar">
       <div class="network-dot" aria-hidden="true"></div>
       <div><strong>ISLAND TREASURES</strong><span id="networkStatus">Guest Wi-Fi</span></div>
-      <button id="resetButton" class="text-button">Restart</button>
+      <button id="resetButton" class="text-button" type="button">Start over</button>
     </header>
 
     <section id="welcome" class="screen welcome active">
@@ -24,134 +25,103 @@
       <p class="eyebrow">WELCOME TO PUNTA LANGOSTA</p>
       <h1>Free Wi-Fi<br />starts here.</h1>
       <p class="lead">Connect for <strong>10 free minutes</strong> to message home, check maps and share your first Cozumel photos.</p>
-      <div class="benefit-row">
-        <span>⚡ Instant access</span><span>◉ No sign-up</span><span>⌁ Free</span>
-      </div>
-      <button id="connectButton" class="primary">Connect to free Wi-Fi <b>→</b></button>
-      <label class="terms"><input id="terms" type="checkbox" checked /> I accept the guest Wi-Fi terms.</label>
-      <p class="prototype-note">Interactive prototype · timer runs faster for the demo</p>
+      <div class="benefit-row"><span>⚡ Quick access</span><span>◉ No form</span><span>⌁ Free</span></div>
+      <button id="connectButton" class="primary" type="button">Connect to free Wi-Fi <b>→</b></button>
+      <label class="terms"><input id="terms" type="checkbox" /> I accept the <button id="openTerms" class="inline-link" type="button">Wi-Fi terms</button>.</label>
+      <button id="openPrivacy" class="privacy-link" type="button">Privacy notice</button>
     </section>
 
     <section id="online" class="screen online">
-      <div class="status-pill">● YOU'RE ONLINE</div>
-      <p class="eyebrow">FREE SESSION</p>
+      <div class="status-pill">● YOU’RE ONLINE</div>
+      <p class="eyebrow">COMPLIMENTARY SESSION</p>
       <div class="timer" aria-live="polite"><span id="timerMinutes">10</span><em>:</em><span id="timerSeconds">00</span></div>
       <p class="timer-label">minutes remaining</p>
-      <div class="usage-card">
-        <div><strong>Island Treasures Guest</strong><span>WhatsApp · Maps · Photos</span></div>
-        <div class="signal">▂▄▆█</div>
-      </div>
+      <div class="usage-card"><div><strong>Island Treasures Guest</strong><span>WhatsApp · Maps · Photos</span></div><div class="signal">▂▄▆█</div></div>
       <div class="tip-card"><span>💡</span><p><strong>Need more time?</strong><br />When this session ends, you can unlock 60 additional minutes nearby.</p></div>
-      <button id="expireButton" class="secondary">Demo: finish the 10 minutes</button>
+      <button id="expireButton" class="secondary qa-only" type="button">QA: finish the 10 minutes</button>
     </section>
 
     <section id="expired" class="screen expired">
       <div class="hourglass">⌛</div>
       <p class="eyebrow coral">YOUR FREE SESSION HAS ENDED</p>
       <h2>Want 60 more<br />minutes free?</h2>
-      <p class="lead">Take the shortcut through <strong>Diamonds International</strong> and continue to Island Treasures. Ask the Island Treasures team for today’s Wi-Fi code.</p>
-
+      <p class="lead">Take the shortcut through <strong>Diamonds International</strong> to Island Treasures. It is only about a minute and a half away.</p>
       <article class="route-card">
-        <div class="route-head"><span>YOUR ROUTE</span><strong>About 1½ min</strong></div>
-        <div class="mini-map real-layout" aria-label="Route from the cruise pier and map booth through Diamonds International to Island Treasures">
-          <svg viewBox="0 0 360 220" role="img" aria-labelledby="mapTitle mapDescription">
+        <div class="route-head"><span>YOUR SHORTCUT</span><strong>About 1½ min</strong></div>
+        <div class="mini-map real-layout" aria-label="Route from the cruise arrival area through Diamonds International to Island Treasures">
+          <svg viewBox="0 0 360 245" role="img" aria-labelledby="mapTitle mapDescription">
             <title id="mapTitle">Shortcut to Island Treasures</title>
-            <desc id="mapDescription">Passengers cross the pier and bridge, arrive at the map booth, enter Diamonds International, cross the store and exit beside Island Treasures.</desc>
-            <path class="water" d="M0 0h360v220H0z" />
-            <path class="land" d="M173 220c6-34 12-52 28-69 14-15 25-29 35-47 15-27 31-36 59-44 20-6 43-13 65-21v181z" />
-            <path class="pier" d="M48 0c17 31 35 60 55 84 23 28 51 51 86 70" />
-            <path class="bridge" d="M172 139c10 11 18 20 27 32" />
-            <rect class="security" x="173" y="133" width="23" height="20" rx="5" transform="rotate(39 184 143)" />
-            <rect class="maps" x="196" y="164" width="30" height="22" rx="5" transform="rotate(22 211 175)" />
-            <path class="plaza" d="M213 190l34-77 82 24-24 71z" />
-            <path class="diamonds" d="M221 179l20-48 35 13-20 47z" />
-            <path class="island" d="M278 120l35 9-7 27-36-9z" />
-            <path class="route-shadow" d="M187 151C199 169 207 178 222 181L244 188C255 191 264 185 265 176C266 167 259 158 253 151C249 145 256 139 268 143L290 137" />
-            <path class="route" d="M187 151C199 169 207 178 222 181L244 188C255 191 264 185 265 176C266 167 259 158 253 151C249 145 256 139 268 143L290 137" />
-            <circle class="start-dot" cx="187" cy="151" r="7" />
-            <circle class="finish-dot" cx="290" cy="137" r="8" />
-            <text class="map-text pier-text" x="61" y="42">CRUISE PIER</text>
-            <text class="map-text arrival-text" x="136" y="133">BRIDGE</text>
-            <text class="map-text booth-text" x="182" y="199">MAP BOOTH</text>
-            <text class="store-text" x="221" y="160" transform="rotate(-67 221 160)">DIAMONDS</text>
-            <text class="island-text" x="284" y="134">ISLAND</text>
-            <text class="island-text" x="278" y="145">TREASURES</text>
-            <text class="you-text" x="171" y="147">YOU</text>
+            <desc id="mapDescription">Cross the bridge, pass the map booth, enter Diamonds International, make a U-turn through the store and exit beside Island Treasures.</desc>
+            <path class="water" d="M0 0h360v245H0z" />
+            <path class="land" d="M160 245c8-41 18-65 37-85 14-15 25-29 35-47 15-27 36-39 67-47 24-6 43-12 61-20v199z" />
+            <path class="pier" d="M47 0c18 35 38 66 61 92 23 27 49 48 82 69" />
+            <path class="bridge" d="M171 144c10 11 19 21 29 33" />
+            <rect class="security" x="174" y="138" width="23" height="20" rx="5" transform="rotate(39 185 148)" />
+            <rect class="maps" x="194" y="171" width="31" height="23" rx="5" transform="rotate(22 210 182)" />
+            <path class="plaza" d="M211 203l36-83 85 25-27 80z" />
+            <path class="diamonds" d="M219 191l22-54 39 14-22 53z" />
+            <path class="island" d="M282 127l38 10-8 29-38-10z" />
+            <path class="route-shadow" d="M187 157C198 173 208 184 223 189L244 196C257 200 269 192 269 180C269 168 258 162 253 154C250 149 257 145 269 149L296 143" />
+            <path class="route" d="M187 157C198 173 208 184 223 189L244 196C257 200 269 192 269 180C269 168 258 162 253 154C250 149 257 145 269 149L296 143" />
+            <path class="u-arrow" d="M247 183c10 8 20 4 20-5" />
+            <circle class="start-dot" cx="187" cy="157" r="7" /><circle class="finish-dot" cx="296" cy="143" r="8" />
+            <text class="map-text pier-text" x="57" y="44">CRUISE PIER</text><text class="map-text arrival-text" x="137" y="139">BRIDGE</text>
+            <text class="map-text booth-text" x="180" y="212">MAP BOOTH</text><text class="store-text" x="221" y="173" transform="rotate(-67 221 173)">DIAMONDS</text>
+            <text class="turn-text" x="263" y="215">MAKE THE U-TURN</text><text class="island-text" x="287" y="143">ISLAND</text><text class="island-text" x="281" y="154">TREASURES</text>
+            <text class="you-text" x="171" y="153">START</text>
           </svg>
-          <div class="map-legend"><span><i class="legend-route"></i>Recommended shortcut</span><span><i class="legend-store"></i>Walk through Diamonds</span></div>
+          <div class="map-legend"><span><i class="legend-route"></i>Follow this route</span><span><i class="legend-store"></i>Walk through Diamonds</span></div>
         </div>
         <ol class="directions">
           <li><b>1</b><span>From the map booth, walk about 10 meters.</span></li>
-          <li><b>2</b><span>Enter Diamonds International on your left, follow the aisle and make the U-turn through the store.</span></li>
-          <li><b>3</b><span>Exit toward Island Treasures and ask its team for the Wi-Fi code.</span></li>
+          <li><b>2</b><span>Enter Diamonds International on your left and make the U-turn through the store.</span></li>
+          <li><b>3</b><span>Exit toward Island Treasures and ask its cashier for the Wi-Fi code.</span></li>
         </ol>
       </article>
-
       <form id="wifiCodeForm" class="code-card">
         <label for="wifiCode">Enter today’s Wi-Fi code</label>
-        <div><input id="wifiCode" autocomplete="off" autocapitalize="characters" placeholder="TRY: ISLAND" /><button type="submit">Unlock</button></div>
-        <p class="code-help">Code available at Island Treasures · Prototype: <strong>ISLAND</strong></p>
-        <p id="wifiCodeMessage" class="form-message" role="status"></p>
+        <div><input id="wifiCode" autocomplete="one-time-code" autocapitalize="characters" placeholder="ENTER CODE" maxlength="20" /><button type="submit">Unlock</button></div>
+        <p class="code-help">Ask the Island Treasures cashier for today’s code.</p><p id="wifiCodeMessage" class="form-message" role="status"></p>
       </form>
     </section>
 
     <section id="unlocked" class="screen unlocked">
-      <div class="success-icon">✓</div>
-      <p class="eyebrow">60 MINUTES UNLOCKED</p>
-      <h2>You’re back online!</h2>
+      <div class="success-icon">✓</div><p class="eyebrow">60 MINUTES UNLOCKED</p><h2>You’re back online!</h2>
       <p class="lead">Your extended session is active. Before you continue exploring Cozumel, would you like to win a free souvenir?</p>
-      <div class="unlocked-promo">
-        <img src="free-souvenir-teaser.png" alt="A colorful Cozumel souvenir treasure chest by the Caribbean Sea" />
-        <div><strong>WIN A FREE SOUVENIR</strong><span>Complete the optional Treasure Quest</span></div>
-      </div>
-      <div class="reward-preview">
-        <div class="coin">★</div>
-        <div><span>OPTIONAL TREASURE QUEST</span><strong>Complete 3 quick stops</strong><small>Get a new code at this cashier, continue to Diamonds and take its elevator down to your prize.</small></div>
-      </div>
-      <button id="acceptQuest" class="primary">Yes, start the mission <b>→</b></button>
-      <button id="declineQuest" class="quiet">No thanks, continue to Wi-Fi</button>
+      <div class="unlocked-promo"><img src="free-souvenir-teaser.png" alt="A colorful Cozumel treasure chest by the Caribbean Sea" /><div><strong>WIN A FREE SOUVENIR</strong><span>Complete three quick stops inside the plaza</span></div></div>
+      <div class="reward-preview"><div class="coin">★</div><div><span>OPTIONAL TREASURE QUEST</span><strong>Three codes. One prize.</strong><small>Start here, continue through Diamonds and finish downstairs at Island Booty.</small></div></div>
+      <button id="acceptQuest" class="primary" type="button">Yes, start the mission <b>→</b></button><button id="declineQuest" class="quiet" type="button">No thanks, continue with Wi-Fi</button>
     </section>
 
     <section id="declined" class="screen declined">
-      <div class="status-pill">● 60 MINUTES ACTIVE</div>
-      <h2>Enjoy Cozumel!</h2>
-      <p class="lead">You skipped the mission. Your internet remains active and you can return at any time by scanning the Island Treasures QR or NFC token.</p>
-      <button id="changeMind" class="secondary">Start the treasure quest</button>
+      <div class="status-pill">● 60 MINUTES ACTIVE</div><h2>Enjoy Cozumel!</h2>
+      <p class="lead">Your internet remains active. You can return to the mission from this device while today’s session is available.</p>
+      <button id="changeMind" class="secondary" type="button">Start the Treasure Quest</button>
     </section>
 
     <section id="quest" class="screen quest">
       <div class="quest-progress"><span id="questStepLabel">MISSION 1 OF 3</span><div><i id="questProgress"></i></div></div>
       <article class="mission-card">
-        <span id="missionBadge" class="mission-badge">STOP 1</span>
-        <p class="eyebrow" id="missionEyebrow">YOU ARE ALREADY AT THE FIRST STOP</p>
-        <h2 id="missionTitle">Return to the Island Treasures cashier</h2>
-        <p id="missionCopy">Ask the cashier for the new Treasure Quest code. This is different from the Wi-Fi code you just entered.</p>
-        <div class="photo-slot"><span>REAL LOCATION PHOTO</span><small>Your photo will replace this placeholder</small></div>
-        <div class="mission-route"><span>Current stop</span><b id="missionDestination">Island Treasures · cashier</b><em>New mission code</em></div>
+        <span id="missionBadge" class="mission-badge">STOP 1</span><p class="eyebrow" id="missionEyebrow">YOU ARE AT THE FIRST STOP</p>
+        <h2 id="missionTitle">Ask the Island Treasures cashier</h2><p id="missionCopy">Ask for the first Treasure Quest code. It is different from the Wi-Fi code.</p>
+        <div id="missionVisual" class="mission-visual stop-one" aria-hidden="true"><span class="visual-icon">★</span><strong>ISLAND TREASURES</strong><small>Temple of Fun</small></div>
+        <div class="mission-route"><span>Current stop</span><b id="missionDestination">Island Treasures · cashier</b><em id="missionAction">Ask for code #1</em></div>
       </article>
-      <form id="missionForm" class="code-card dark">
-        <label for="missionCode">Enter the secret code at this stop</label>
-        <div><input id="missionCode" autocomplete="off" autocapitalize="characters" placeholder="SECRET CODE" /><button type="submit">Check</button></div>
-        <p id="missionHint">Prototype code: <strong>TEMPLE</strong></p>
-        <p id="missionMessage" class="form-message" role="status"></p>
-      </form>
+      <form id="missionForm" class="code-card dark"><label for="missionCode">Enter the secret code at this stop</label><div><input id="missionCode" autocomplete="one-time-code" autocapitalize="characters" placeholder="SECRET CODE" maxlength="20" /><button type="submit">Check</button></div><p id="missionHint">Ask the team at this stop for the secret code.</p><p id="missionMessage" class="form-message" role="status"></p></form>
     </section>
 
     <section id="reward" class="screen reward">
-      <div class="sparkles">✦ ✧ ✦</div>
-      <p class="eyebrow">TREASURE QUEST COMPLETE</p>
-      <h2>Your souvenir<br />is waiting!</h2>
-      <div class="voucher">
-        <span>VALID TODAY</span>
-        <strong id="rewardCode">IT-4827</strong>
-        <div class="voucher-lines"></div>
-        <p>Show this live screen to the Island Woody team to receive your souvenir.</p>
-        <small>One reward per device · Prototype</small>
-      </div>
-      <p class="live-note"><i></i> Live claim screen</p>
-      <button id="finishButton" class="primary">Finish demo</button>
+      <div class="sparkles">✦ ✧ ✦</div><p class="eyebrow">TREASURE QUEST COMPLETE</p><h2>Your souvenir<br />is waiting!</h2>
+      <img class="booty-logo" src="island-booty-logo.png" alt="Island Booty — Caribbean Treasures" />
+      <div class="voucher"><span id="voucherStatus">READY TO CLAIM TODAY</span><strong id="rewardCode">IT-0000</strong><div class="voucher-lines"></div><p>Show this live screen to the Island Booty team to receive your souvenir.</p><small>One reward per device · While supplies last · Staff validation required</small></div>
+      <p class="live-note"><i></i> <span id="claimState">Live claim screen</span></p>
+      <button id="claimButton" class="primary staff-action" type="button">Staff: mark souvenir as claimed</button>
+      <button id="finishButton" class="quiet" type="button">Close</button>
     </section>
   </main>
+
+  <dialog id="termsDialog" class="legal-dialog"><button class="dialog-close" data-close type="button" aria-label="Close">×</button><h2>Guest Wi-Fi terms</h2><p>Complimentary access is temporary and subject to network availability. Do not use the service for unlawful, abusive or security-compromising activity. Access may be limited or suspended to protect the network.</p><p>The Treasure Quest is optional. Rewards are limited to one per person/device, require staff validation and are available only while supplies last. Final duration, participating locations and promotion validity are subject to confirmation by the operator.</p><small>Working version for operational and legal approval before launch.</small></dialog>
+  <dialog id="privacyDialog" class="legal-dialog"><button class="dialog-close" data-close type="button" aria-label="Close">×</button><h2>Privacy notice</h2><p>This web experience does not ask for your name, email or telephone number. It stores session progress, a random claim reference and claim status locally on this device so the experience can continue if the page reloads.</p><p>The Wi-Fi network operator may separately process technical connection data such as device/network identifiers, IP address and access times for security and operation. The operator’s final identity, contact details and rights-request procedure must be added before launch.</p><small>Working version for operational and legal approval before launch.</small></dialog>
   <script src="app.js"></script>
 </body>
 </html>

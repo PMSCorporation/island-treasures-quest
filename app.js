@@ -1,123 +1,165 @@
 const screens = [...document.querySelectorAll('.screen')];
 const $ = id => document.getElementById(id);
+const STORAGE_KEY = 'islandTreasuresGuestV3';
+const DEMO_MODE = new URLSearchParams(location.search).get('demo') === '1';
+const SESSION_SECONDS = DEMO_MODE ? 20 : 600;
 let timerHandle;
-let secondsLeft = 600;
-let questStep = 0;
+
+const CODE_HASHES = {
+  wifi: '96abf3e6277b59780f196acfef3c3e897603f7161a9d989c6d81bf0433acf3a1',
+  temple: '9de05beff439add983f26430b8ae6846a0247071c0e640e401c297d22d6ff0d1',
+  diamond: '6d924f7bddebb3a59fdc05c0e6eab5623c535e3538946a8301ca0fdd7bf61f76',
+  booty: '613b11c983201f40b8637cd79c401ab0d2529ba7581ba33bd102653b097c5076'
+};
 
 const missions = [
-  {
-    eyebrow: 'YOU ARE ALREADY AT THE FIRST STOP',
-    title: 'Return to the Island Treasures cashier',
-    copy: 'Ask the cashier for the new Treasure Quest code. This is different from the Wi-Fi code you just entered.',
-    destination: 'Island Treasures · cashier',
-    code: 'TEMPLE'
-  },
-  {
-    eyebrow: 'THE NEXT CLUE IS INSIDE',
-    title: 'Continue to Diamonds International',
-    copy: 'Go to Diamonds International and ask for the second Treasure Quest code. Enter it here to unlock your final destination.',
-    destination: 'Diamonds International',
-    code: 'DIAMOND'
-  },
-  {
-    eyebrow: 'FINAL STOP · CLAIM YOUR PRIZE',
-    title: 'Take the elevator to Island Woody',
-    copy: 'Inside Diamonds, take the elevator downstairs to Island Woody. Ask for the final code, enter it here and show the completed screen to receive your free souvenir.',
-    destination: 'Island Woody · downstairs',
-    code: 'WOODY'
-  }
+  { eyebrow: 'YOU ARE ALREADY AT THE FIRST STOP', title: 'Ask the Island Treasures cashier', copy: 'Ask for the first Treasure Quest code. It is different from the Wi-Fi code you just entered.', destination: 'Island Treasures · cashier', action: 'Ask for code #1', hash: CODE_HASHES.temple, visual: ['stop-one', '★', 'ISLAND TREASURES', 'Temple of Fun'] },
+  { eyebrow: 'FOLLOW THE SHORTCUT THROUGH THE STORE', title: 'Continue to Diamonds International', copy: 'Walk back into Diamonds International and ask its team for the second Treasure Quest code.', destination: 'Diamonds International', action: 'Ask for code #2', hash: CODE_HASHES.diamond, visual: ['stop-two', '◆', 'DIAMONDS', 'International'] },
+  { eyebrow: 'FINAL STOP · CLAIM YOUR PRIZE', title: 'Take the elevator to Island Booty', copy: 'Inside Diamonds, take the elevator downstairs. At Island Booty, ask for the final code and enter it here.', destination: 'Island Booty · downstairs', action: 'Final code + prize', hash: CODE_HASHES.booty, visual: ['stop-three', '☀', 'ISLAND BOOTY', 'Caribbean Treasures'] }
 ];
 
-function show(id) {
+const blankState = () => ({ screen: 'welcome', startedAt: null, questStep: 0, rewardCode: null, claimed: false });
+let state = loadState();
+
+function loadState() {
+  try { return { ...blankState(), ...JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') }; }
+  catch { return blankState(); }
+}
+
+function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+
+function show(id, persist = true) {
   screens.forEach(screen => screen.classList.toggle('active', screen.id === id));
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  const statuses = {
-    welcome: 'Guest Wi-Fi', online: 'Connected · 10 min', expired: 'Access paused',
-    unlocked: 'Connected · 60 min', declined: 'Connected · 60 min', quest: 'Connected · Mission active', reward: 'Connected · Reward unlocked'
-  };
+  const statuses = { welcome: 'Guest Wi-Fi', online: 'Connected · 10 min', expired: 'Access paused', unlocked: 'Connected · 60 min', declined: 'Connected · 60 min', quest: 'Connected · Mission active', reward: 'Reward unlocked' };
   $('networkStatus').textContent = statuses[id] || 'Guest Wi-Fi';
+  if (persist) { state.screen = id; saveState(); }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function secondsRemaining() {
+  if (!state.startedAt) return SESSION_SECONDS;
+  return Math.max(0, SESSION_SECONDS - Math.floor((Date.now() - state.startedAt) / 1000));
 }
 
 function updateTimer() {
-  const m = Math.floor(secondsLeft / 60);
-  const s = secondsLeft % 60;
-  $('timerMinutes').textContent = String(m).padStart(2, '0');
-  $('timerSeconds').textContent = String(s).padStart(2, '0');
+  const remaining = secondsRemaining();
+  $('timerMinutes').textContent = String(Math.floor(remaining / 60)).padStart(2, '0');
+  $('timerSeconds').textContent = String(remaining % 60).padStart(2, '0');
+  if (remaining === 0) expireSession();
 }
 
 function startTimer() {
   clearInterval(timerHandle);
-  secondsLeft = 600;
-  updateTimer();
+  state.startedAt = Date.now();
+  saveState();
   show('online');
-  // Accelerated prototype: one displayed minute passes every six real seconds.
-  timerHandle = setInterval(() => {
-    secondsLeft = Math.max(0, secondsLeft - 10);
-    updateTimer();
-    if (secondsLeft === 0) expireSession();
-  }, 1000);
+  updateTimer();
+  timerHandle = setInterval(updateTimer, 1000);
 }
 
-function expireSession() {
+function resumeTimer() {
   clearInterval(timerHandle);
-  show('expired');
+  if (secondsRemaining() <= 0) return expireSession();
+  updateTimer();
+  timerHandle = setInterval(updateTimer, 1000);
+}
+
+function expireSession() { clearInterval(timerHandle); show('expired'); }
+
+async function digest(value) {
+  const data = new TextEncoder().encode(value.trim().toUpperCase());
+  const result = await crypto.subtle.digest('SHA-256', data);
+  return [...new Uint8Array(result)].map(byte => byte.toString(16).padStart(2, '0')).join('');
+}
+
+function makeRewardCode() {
+  if (state.rewardCode) return state.rewardCode;
+  const values = new Uint32Array(1);
+  crypto.getRandomValues(values);
+  state.rewardCode = `IT-${String(1000 + (values[0] % 9000))}`;
+  saveState();
+  return state.rewardCode;
 }
 
 function renderMission() {
-  if (questStep >= missions.length) {
-    $('rewardCode').textContent = `IT-${Math.floor(1000 + Math.random() * 9000)}`;
-    return show('reward');
-  }
-  const mission = missions[questStep];
-  $('questStepLabel').textContent = `MISSION ${questStep + 1} OF ${missions.length}`;
-  $('questProgress').style.width = `${((questStep + 1) / missions.length) * 100}%`;
-  $('missionBadge').textContent = `STOP ${questStep + 1}`;
+  if (state.questStep >= missions.length) return renderReward();
+  const mission = missions[state.questStep];
+  $('questStepLabel').textContent = `MISSION ${state.questStep + 1} OF ${missions.length}`;
+  $('questProgress').style.width = `${((state.questStep + 1) / missions.length) * 100}%`;
+  $('missionBadge').textContent = `STOP ${state.questStep + 1}`;
   $('missionEyebrow').textContent = mission.eyebrow;
   $('missionTitle').textContent = mission.title;
   $('missionCopy').textContent = mission.copy;
   $('missionDestination').textContent = mission.destination;
-  $('missionHint').innerHTML = `Prototype code: <strong>${mission.code}</strong>`;
+  $('missionAction').textContent = mission.action;
+  const visual = $('missionVisual');
+  visual.className = `mission-visual ${mission.visual[0]}`;
+  visual.innerHTML = `<span class="visual-icon">${mission.visual[1]}</span><strong>${mission.visual[2]}</strong><small>${mission.visual[3]}</small>`;
   $('missionCode').value = '';
   $('missionMessage').textContent = '';
   show('quest');
 }
 
+function renderReward() {
+  $('rewardCode').textContent = makeRewardCode();
+  $('voucherStatus').textContent = state.claimed ? 'SOUVENIR CLAIMED' : 'READY TO CLAIM TODAY';
+  $('claimState').textContent = state.claimed ? 'Claim recorded on this device' : 'Live claim screen';
+  $('claimButton').disabled = state.claimed;
+  $('claimButton').textContent = state.claimed ? 'Souvenir already claimed' : 'Staff: mark souvenir as claimed';
+  document.querySelector('.voucher').classList.toggle('claimed', state.claimed);
+  show('reward');
+}
+
 $('connectButton').addEventListener('click', () => {
-  if (!$('terms').checked) return alert('Please accept the guest Wi-Fi terms.');
+  if (!$('terms').checked) { $('openTerms').focus(); return alert('Please accept the guest Wi-Fi terms to continue.'); }
   startTimer();
 });
 $('expireButton').addEventListener('click', expireSession);
-$('wifiCodeForm').addEventListener('submit', event => {
+$('wifiCodeForm').addEventListener('submit', async event => {
   event.preventDefault();
-  const code = $('wifiCode').value.trim().toUpperCase();
-  if (code !== 'ISLAND') {
-    $('wifiCodeMessage').textContent = 'That code is not valid. Ask the Island Treasures team for today’s code.';
-    return;
-  }
+  const valid = await digest($('wifiCode').value) === CODE_HASHES.wifi;
+  if (!valid) { $('wifiCodeMessage').textContent = 'That code is not valid. Ask the Island Treasures cashier for today’s code.'; return; }
   $('wifiCodeMessage').textContent = 'Correct — 60 minutes unlocked!';
-  setTimeout(() => show('unlocked'), 650);
+  setTimeout(() => show('unlocked'), 500);
 });
-$('acceptQuest').addEventListener('click', () => { questStep = 0; renderMission(); });
+$('acceptQuest').addEventListener('click', () => { state.questStep = 0; saveState(); renderMission(); });
 $('declineQuest').addEventListener('click', () => show('declined'));
-$('changeMind').addEventListener('click', () => { questStep = 0; renderMission(); });
-$('missionForm').addEventListener('submit', event => {
+$('changeMind').addEventListener('click', renderMission);
+$('missionForm').addEventListener('submit', async event => {
   event.preventDefault();
-  const code = $('missionCode').value.trim().toUpperCase();
-  if (code !== missions[questStep].code) {
-    $('missionMessage').textContent = 'That is not the treasure code for this stop. Try again.';
-    return;
-  }
-  $('missionMessage').textContent = 'Correct! The next destination is unlocked.';
-  setTimeout(() => { questStep += 1; renderMission(); }, 650);
+  if (await digest($('missionCode').value) !== missions[state.questStep].hash) { $('missionMessage').textContent = 'That is not the code for this stop. Please ask the team and try again.'; return; }
+  $('missionMessage').textContent = state.questStep === missions.length - 1 ? 'Correct — treasure found!' : 'Correct — your next destination is unlocked!';
+  state.questStep += 1; saveState();
+  setTimeout(renderMission, 500);
 });
+
+$('claimButton').addEventListener('click', () => {
+  if (state.claimed) return;
+  if (!confirm('Staff confirmation: mark this souvenir as claimed? This cannot be undone on this device.')) return;
+  state.claimed = true; saveState(); renderReward();
+});
+
 function reset() {
+  if (state.screen !== 'welcome' && !confirm('Start over and clear the current progress on this device?')) return;
   clearInterval(timerHandle);
-  secondsLeft = 600;
-  questStep = 0;
-  $('wifiCode').value = '';
-  $('wifiCodeMessage').textContent = '';
+  state = blankState(); saveState();
+  $('terms').checked = false; $('wifiCode').value = ''; $('wifiCodeMessage').textContent = '';
   show('welcome');
 }
 $('resetButton').addEventListener('click', reset);
-$('finishButton').addEventListener('click', reset);
-show('welcome');
+$('finishButton').addEventListener('click', () => show('welcome'));
+
+function wireDialog(openButton, dialog) {
+  openButton.addEventListener('click', () => dialog.showModal());
+  dialog.querySelector('[data-close]').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+}
+wireDialog($('openTerms'), $('termsDialog'));
+wireDialog($('openPrivacy'), $('privacyDialog'));
+
+if (DEMO_MODE) document.body.classList.add('demo-mode');
+const resumable = ['welcome', 'online', 'expired', 'unlocked', 'declined', 'quest', 'reward'].includes(state.screen) ? state.screen : 'welcome';
+if (resumable === 'online') resumeTimer();
+else if (resumable === 'quest') renderMission();
+else if (resumable === 'reward') renderReward();
+else show(resumable, false);

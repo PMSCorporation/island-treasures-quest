@@ -22,3 +22,5 @@
 .map-legend i{width:13px;height:5px;border-radius:6px;display:inline-block}
 .legend-route{background:#073b43}
 .legend-store{background:#75c96f}
+.real-layout .u-arrow{fill:none;stroke:#ef6d72;stroke-width:3;stroke-linecap:round}
+.real-layout .turn-text{fill:#a73e4b;font:950 7px Inter,system-ui,sans-serif;letter-spacing:.04em}

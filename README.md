@@ -1,13 +1,24 @@
-# Island Treasures Wi-Fi Quest — Prototype 2
+# Island Treasures Wi-Fi Quest
 
-Interactive mobile prototype of the revised customer flow:
+Mobile web experience for guests arriving at Punta Langosta, Cozumel.
 
-1. Ten-minute free guest Wi-Fi session.
-2. Session-expired state and 1½-minute shortcut through Diamonds International to Island Treasures.
-3. Demo Wi-Fi code `ISLAND`, obtained at Island Treasures, unlocks 60 minutes.
-4. Optional treasure quest or continue directly to Wi-Fi.
-5. Three-stop quest: a new code at the Island Treasures cashier, a code at Diamonds International and a final code at Island Woody.
-6. Demo mission codes `TEMPLE`, `DIAMOND` and `WOODY` (separate from the Wi-Fi code `ISLAND`).
-7. Diamonds elevator directions lead downstairs to Island Woody for the souvenir claim.
+## Visitor flow
 
-The map and location photographs are placeholders until the site-visit assets are supplied.
+1. Accept the Wi-Fi terms and receive 10 complimentary minutes.
+2. Follow the 1½-minute shortcut through Diamonds International to Island Treasures.
+3. Obtain the Wi-Fi code at Island Treasures and unlock the extended session.
+4. Optionally complete three stops: Island Treasures, Diamonds International and Island Booty.
+5. Show the live completion screen at Island Booty and have staff mark the souvenir as claimed.
+
+Progress and claim status persist on the visitor's device. Operational codes are validated by hashes and are not printed in the interface or documentation.
+
+## Test mode
+
+Append `?demo=1` to the URL to shorten the first session to 20 seconds and display the QA skip control. The normal URL uses the full 10-minute timer.
+
+## Before launch
+
+- Confirm the captive-portal handoff and session rules with the plaza network administrator.
+- Replace the working legal text with the approved company identity, privacy contact and promotion validity/stock.
+- Confirm final operational codes and rotate them before public launch.
+- Test on the actual Wi-Fi network and on current iPhone and Android devices.
