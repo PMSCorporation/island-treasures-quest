@@ -2,8 +2,35 @@ const screens = [...document.querySelectorAll('.screen')];
 const $ = id => document.getElementById(id);
 const STORAGE_KEY = 'islandTreasuresGuestV3';
 const DEMO_MODE = new URLSearchParams(location.search).get('demo') === '1';
+const PREVIEW_MODE = DEMO_MODE || location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname.endsWith('.github.io');
 const SESSION_SECONDS = DEMO_MODE ? 20 : 600;
 let timerHandle;
+
+async function portalRequest(path, body) {
+  const response = await fetch(path, {
+    method: 'POST',
+    headers: body ? { 'Content-Type': 'application/json' } : undefined,
+    body: body ? JSON.stringify(body) : undefined
+  });
+
+  let payload;
+  try { payload = await response.json(); }
+  catch { throw new Error('invalid_response'); }
+
+  if (!response.ok || !payload.ok) throw new Error(payload.error || 'request_failed');
+  return payload;
+}
+
+function portalErrorMessage(error) {
+  const messages = {
+    invalid_code: 'That code is not valid. Ask the Island Treasures cashier for today\'s code.',
+    already_used: 'That code has already been used. Please ask the cashier for help.',
+    expired: 'That code has expired. Please ask the cashier for today\'s code.',
+    rate_limited: 'Too many attempts. Please wait a moment and try again.',
+    invalid_response: 'The Wi-Fi service did not return a valid response. Please ask the team for help.'
+  };
+  return messages[error.message] || 'We could not connect to the Wi-Fi service. Please try again.';
+}
 
 const CODE_HASHES = {
   wifi: '96abf3e6277b59780f196acfef3c3e897603f7161a9d989c6d81bf0433acf3a1',
@@ -110,17 +137,42 @@ function renderReward() {
   show('reward');
 }
 
-$('connectButton').addEventListener('click', () => {
+$('connectButton').addEventListener('click', async () => {
   if (!$('terms').checked) { $('openTerms').focus(); return alert('Please accept the guest Wi-Fi terms to continue.'); }
-  startTimer();
+  const button = $('connectButton');
+  button.disabled = true;
+  button.textContent = 'Connecting…';
+  try {
+    if (!PREVIEW_MODE) await portalRequest('/api/free');
+    startTimer();
+  } catch (error) {
+    alert(portalErrorMessage(error));
+  } finally {
+    button.disabled = false;
+    button.textContent = 'Connect free';
+  }
 });
 $('expireButton').addEventListener('click', expireSession);
 $('wifiCodeForm').addEventListener('submit', async event => {
   event.preventDefault();
-  const valid = await digest($('wifiCode').value) === CODE_HASHES.wifi;
-  if (!valid) { $('wifiCodeMessage').textContent = 'That code is not valid. Ask the Island Treasures cashier for today’s code.'; return; }
-  $('wifiCodeMessage').textContent = 'Correct — 60 minutes unlocked!';
-  setTimeout(() => show('unlocked'), 500);
+  const code = $('wifiCode').value.trim();
+  const submit = event.submitter;
+  if (submit) submit.disabled = true;
+  $('wifiCodeMessage').textContent = 'Checking code…';
+  try {
+    if (PREVIEW_MODE) {
+      const valid = await digest(code) === CODE_HASHES.wifi;
+      if (!valid) throw new Error('invalid_code');
+    } else {
+      await portalRequest('/api/code', { code });
+    }
+    $('wifiCodeMessage').textContent = 'Correct — 60 minutes unlocked!';
+    setTimeout(() => show('unlocked'), 500);
+  } catch (error) {
+    $('wifiCodeMessage').textContent = portalErrorMessage(error);
+  } finally {
+    if (submit) submit.disabled = false;
+  }
 });
 $('acceptQuest').addEventListener('click', () => { state.questStep = 0; saveState(); renderMission(); });
 $('declineQuest').addEventListener('click', () => show('declined'));
