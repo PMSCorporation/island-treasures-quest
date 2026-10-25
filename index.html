@@ -7,7 +7,7 @@
   <meta name="description" content="Island Treasures complimentary Wi-Fi and Treasure Quest at Punta Langosta, Cozumel." />
   <title>Island Treasures · Free Wi-Fi</title>
   <link rel="stylesheet" href="styles.css?v=3" />
-  <link rel="stylesheet" href="map.css?v=3" />
+  <link rel="stylesheet" href="map.css?v=4" />
   <link rel="stylesheet" href="teaser.css?v=3" />
   <link rel="stylesheet" href="production.css?v=3" />
 </head>
@@ -48,29 +48,42 @@
       <p class="lead">Take the shortcut through <strong>Diamonds International</strong> to Island Treasures. It is only about a minute and a half away.</p>
       <article class="route-card">
         <div class="route-head"><span>YOUR SHORTCUT</span><strong>About 1½ min</strong></div>
-        <div class="mini-map real-layout" aria-label="Route from the cruise arrival area through Diamonds International to Island Treasures">
-          <svg viewBox="0 0 360 245" role="img" aria-labelledby="mapTitle mapDescription">
-            <title id="mapTitle">Shortcut to Island Treasures</title>
-            <desc id="mapDescription">Cross the bridge, pass the map booth, enter Diamonds International, make a U-turn through the store and exit beside Island Treasures.</desc>
-            <path class="water" d="M0 0h360v245H0z" />
-            <path class="land" d="M160 245c8-41 18-65 37-85 14-15 25-29 35-47 15-27 36-39 67-47 24-6 43-12 61-20v199z" />
-            <path class="pier" d="M47 0c18 35 38 66 61 92 23 27 49 48 82 69" />
-            <path class="bridge" d="M171 144c10 11 19 21 29 33" />
-            <rect class="security" x="174" y="138" width="23" height="20" rx="5" transform="rotate(39 185 148)" />
-            <rect class="maps" x="194" y="171" width="31" height="23" rx="5" transform="rotate(22 210 182)" />
-            <path class="plaza" d="M211 203l36-83 85 25-27 80z" />
-            <path class="diamonds" d="M219 191l22-54 39 14-22 53z" />
-            <path class="island" d="M282 127l38 10-8 29-38-10z" />
-            <path class="route-shadow" d="M187 157C198 173 208 184 223 189L244 196C257 200 269 192 269 180C269 168 258 162 253 154C250 149 257 145 269 149L296 143" />
-            <path class="route" d="M187 157C198 173 208 184 223 189L244 196C257 200 269 192 269 180C269 168 258 162 253 154C250 149 257 145 269 149L296 143" />
-            <path class="u-arrow" d="M247 183c10 8 20 4 20-5" />
-            <circle class="start-dot" cx="187" cy="157" r="7" /><circle class="finish-dot" cx="296" cy="143" r="8" />
-            <text class="map-text pier-text" x="57" y="44">CRUISE PIER</text><text class="map-text arrival-text" x="137" y="139">BRIDGE</text>
-            <text class="map-text booth-text" x="180" y="212">MAP BOOTH</text><text class="store-text" x="221" y="173" transform="rotate(-67 221 173)">DIAMONDS</text>
-            <text class="turn-text" x="263" y="215">MAKE THE U-TURN</text><text class="island-text" x="287" y="143">ISLAND</text><text class="island-text" x="281" y="154">TREASURES</text>
-            <text class="you-text" x="171" y="153">START</text>
+        <div class="mini-map real-layout" aria-label="Professional wayfinding map from the cruise arrival area through Diamonds International to Island Treasures">
+          <div class="map-titlebar"><span>PLAZA PUNTA LANGOSTA</span><strong>1½ MIN WALK</strong></div>
+          <svg viewBox="0 0 420 300" role="img" aria-labelledby="mapTitle mapDescription">
+            <title id="mapTitle">Fast route to Island Treasures</title>
+            <desc id="mapDescription">From the cruise bridge, pass the information booth, enter Diamonds International, follow the U-shaped route through the store and exit directly in front of Island Treasures.</desc>
+            <defs>
+              <linearGradient id="seaGradient" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#43b9d0"/><stop offset="1" stop-color="#8cdeea"/></linearGradient>
+              <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#123f46" flood-opacity=".18"/></filter>
+              <marker id="routeArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0l10 5-10 5z" fill="#f15e4d"/></marker>
+            </defs>
+            <rect class="map-sea" width="420" height="300" />
+            <path class="map-shore" d="M0 258C74 244 110 210 151 177c50-40 80-71 135-94 45-19 90-28 134-30v247H0z" />
+            <path class="map-pier" d="M30 25C68 62 90 101 127 134c22 20 44 33 72 45" />
+            <path class="map-bridge" d="M177 166l45 34" />
+            <g class="map-building" filter="url(#softShadow)">
+              <path class="plaza-shell" d="M213 191l58-98 124 42-39 131-128-20z" />
+              <path class="diamonds-building" d="M239 202l38-72 66 22-29 89-58-9z" />
+              <path class="island-building" d="M342 107l54 18-12 45-56-19z" />
+              <rect class="info-building" x="210" y="208" width="38" height="25" rx="5" transform="rotate(9 229 220)" />
+            </g>
+            <g class="map-labels">
+              <g transform="translate(43 57)"><rect width="86" height="30" rx="8"/><text x="43" y="13">CRUISE</text><text x="43" y="24">TERMINAL</text></g>
+              <g transform="translate(165 137)"><rect width="76" height="27" rx="8"/><text x="38" y="17">BRIDGE</text></g>
+              <g transform="translate(194 245)"><rect width="72" height="29" rx="8"/><text x="36" y="12">MAP &amp; INFO</text><text x="36" y="23">BOOTH</text></g>
+            </g>
+            <g class="store-label diamonds-label" transform="translate(252 163) rotate(18)"><text x="28" y="0">DIAMONDS</text><text x="28" y="13">INTERNATIONAL</text></g>
+            <g class="store-label island-label" transform="translate(333 127) rotate(18)"><text x="27" y="0">ISLAND</text><text x="27" y="13">TREASURES</text></g>
+            <path class="route-halo" d="M199 179C219 195 231 207 248 215c18 9 45 16 59 3 15-14 9-31-2-41-11-10-18-17-8-25 8-7 21-5 34 0l27 9" />
+            <path class="route-line" marker-end="url(#routeArrow)" d="M199 179C219 195 231 207 248 215c18 9 45 16 59 3 15-14 9-31-2-41-11-10-18-17-8-25 8-7 21-5 34 0l27 9" />
+            <g class="step-marker step-start" transform="translate(199 179)"><circle r="13"/><text y="4">1</text></g>
+            <g class="step-marker" transform="translate(278 221)"><circle r="13"/><text y="4">2</text></g>
+            <g class="step-marker step-finish" transform="translate(365 164)"><circle r="14"/><path d="M-6 0l4 4 8-9"/></g>
+            <g class="turn-callout" transform="translate(272 254)"><rect width="92" height="27" rx="8"/><text x="46" y="11">U-TURN INSIDE</text><text x="46" y="21">DIAMONDS</text></g>
+            <g class="north" transform="translate(387 22)"><path d="M0 22L9 0l9 22-9-5z"/><text x="9" y="33">N</text></g>
           </svg>
-          <div class="map-legend"><span><i class="legend-route"></i>Follow this route</span><span><i class="legend-store"></i>Walk through Diamonds</span></div>
+          <div class="map-legend"><span><i class="legend-route"></i>Recommended route</span><span><i class="legend-store"></i>Indoor shortcut</span></div>
         </div>
         <ol class="directions">
           <li><b>1</b><span>From the map booth, walk about 10 meters.</span></li>
