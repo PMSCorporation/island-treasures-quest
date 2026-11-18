@@ -4,119 +4,49 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#075f68" />
-  <meta name="description" content="Island Treasures complimentary Wi-Fi and Treasure Quest at Punta Langosta, Cozumel." />
-  <title>Island Treasures · Free Wi-Fi</title>
-  <link rel="stylesheet" href="styles.css?v=3" />
-  <link rel="stylesheet" href="map.css?v=4" />
-  <link rel="stylesheet" href="teaser.css?v=3" />
-  <link rel="stylesheet" href="production.css?v=3" />
+  <meta name="description" content="Island Treasures Treasure Quest at Punta Langosta, Cozumel." />
+  <title>Island Treasures · Treasure Quest</title>
+  <link rel="stylesheet" href="styles.css?v=5" />
+  <link rel="stylesheet" href="teaser.css?v=4" />
+  <link rel="stylesheet" href="production.css?v=4" />
 </head>
 <body>
   <main class="phone-shell">
     <header class="topbar">
-      <div class="network-dot" aria-hidden="true"></div>
-      <div><strong>ISLAND TREASURES</strong><span id="networkStatus">Guest Wi-Fi</span></div>
-      <button id="resetButton" class="text-button" type="button">Start over</button>
+      <div class="network-dot quest-dot" aria-hidden="true"></div>
+      <div><strong>ISLAND TREASURES</strong><span id="questStatus">Treasure Quest invitation</span></div>
+      <button id="resetButton" class="text-button" type="button">Restart</button>
     </header>
 
     <section id="welcome" class="screen welcome active">
-      <div class="wifi-rings" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="quest-rays" aria-hidden="true"><i></i><i></i><i></i></div>
       <img src="island-treasures-logo.jpeg" class="logo" alt="Island Treasures — Temple of Fun" />
-      <p class="eyebrow">WELCOME TO PUNTA LANGOSTA</p>
-      <h1>Free Wi-Fi<br />starts here.</h1>
-      <p class="lead">Connect for <strong>10 free minutes</strong> to message home, check maps and share your first Cozumel photos.</p>
-      <div class="benefit-row"><span>⚡ Quick access</span><span>◉ No form</span><span>⌁ Free</span></div>
-      <button id="connectButton" class="primary" type="button">Connect to free Wi-Fi <b>→</b></button>
-      <label class="terms"><input id="terms" type="checkbox" /> I accept the <button id="openTerms" class="inline-link" type="button">Wi-Fi terms</button>.</label>
+      <p class="eyebrow">OFFICIAL QR + NFC EXPERIENCE</p>
+      <h1>Your Cozumel<br />quest starts here.</h1>
+      <p class="lead">You have been invited by the Island Treasures team. Complete three quick stops inside Plaza Punta Langosta and unlock a <strong>free souvenir</strong>.</p>
+
+      <div class="unlocked-promo quest-promo">
+        <img src="free-souvenir-teaser.png" alt="A colorful Cozumel treasure chest by the Caribbean Sea" />
+        <div><strong>FIND THE THREE SECRET CODES</strong><span>Island Treasures · Diamonds · Island Booty</span></div>
+      </div>
+
+      <div class="benefit-row quest-benefits"><span>★ 3 quick stops</span><span>◉ Family friendly</span><span>🎁 Free prize</span></div>
+
+      <aside class="wifi-separate" aria-label="Free Wi-Fi information">
+        <span class="wifi-separate-icon" aria-hidden="true">⌁</span>
+        <div><strong>Looking for free Wi-Fi?</strong><p>Ask the Island Treasures team for the separate Wi-Fi access code. This page runs only the Treasure Quest.</p></div>
+      </aside>
+
+      <button id="acceptQuest" class="primary" type="button">Start the Treasure Quest</button>
+      <label class="terms"><input id="terms" type="checkbox" /> I accept the <button id="openTerms" class="inline-link" type="button">promotion terms</button>.</label>
       <button id="openPrivacy" class="privacy-link" type="button">Privacy notice</button>
-    </section>
-
-    <section id="online" class="screen online">
-      <div class="status-pill">● YOU’RE ONLINE</div>
-      <p class="eyebrow">COMPLIMENTARY SESSION</p>
-      <div class="timer" aria-live="polite"><span id="timerMinutes">10</span><em>:</em><span id="timerSeconds">00</span></div>
-      <p class="timer-label">minutes remaining</p>
-      <div class="usage-card"><div><strong>Island Treasures Guest</strong><span>WhatsApp · Maps · Photos</span></div><div class="signal">▂▄▆█</div></div>
-      <div class="tip-card"><span>💡</span><p><strong>Need more time?</strong><br />When this session ends, you can unlock 60 additional minutes nearby.</p></div>
-      <button id="expireButton" class="secondary qa-only" type="button">QA: finish the 10 minutes</button>
-    </section>
-
-    <section id="expired" class="screen expired">
-      <div class="hourglass">⌛</div>
-      <p class="eyebrow coral">YOUR FREE SESSION HAS ENDED</p>
-      <h2>Want 60 more<br />minutes free?</h2>
-      <p class="lead">Take the shortcut through <strong>Diamonds International</strong> to Island Treasures. It is only about a minute and a half away.</p>
-      <article class="route-card">
-        <div class="route-head"><span>YOUR SHORTCUT</span><strong>About 1½ min</strong></div>
-        <div class="mini-map real-layout" aria-label="Professional wayfinding map from the cruise arrival area through Diamonds International to Island Treasures">
-          <div class="map-titlebar"><span>PLAZA PUNTA LANGOSTA</span><strong>1½ MIN WALK</strong></div>
-          <svg viewBox="0 0 420 300" role="img" aria-labelledby="mapTitle mapDescription">
-            <title id="mapTitle">Fast route to Island Treasures</title>
-            <desc id="mapDescription">From the cruise bridge, pass the information booth, enter Diamonds International, follow the U-shaped route through the store and exit directly in front of Island Treasures.</desc>
-            <defs>
-              <linearGradient id="seaGradient" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#43b9d0"/><stop offset="1" stop-color="#8cdeea"/></linearGradient>
-              <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#123f46" flood-opacity=".18"/></filter>
-              <marker id="routeArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0l10 5-10 5z" fill="#f15e4d"/></marker>
-            </defs>
-            <rect class="map-sea" width="420" height="300" />
-            <path class="map-shore" d="M0 258C74 244 110 210 151 177c50-40 80-71 135-94 45-19 90-28 134-30v247H0z" />
-            <path class="map-pier" d="M30 25C68 62 90 101 127 134c22 20 44 33 72 45" />
-            <path class="map-bridge" d="M177 166l45 34" />
-            <g class="map-building" filter="url(#softShadow)">
-              <path class="plaza-shell" d="M213 191l58-98 124 42-39 131-128-20z" />
-              <path class="diamonds-building" d="M239 202l38-72 66 22-29 89-58-9z" />
-              <path class="island-building" d="M342 107l54 18-12 45-56-19z" />
-              <rect class="info-building" x="210" y="208" width="38" height="25" rx="5" transform="rotate(9 229 220)" />
-            </g>
-            <g class="map-labels">
-              <g transform="translate(43 57)"><rect width="86" height="30" rx="8"/><text x="43" y="13">CRUISE</text><text x="43" y="24">TERMINAL</text></g>
-              <g transform="translate(165 137)"><rect width="76" height="27" rx="8"/><text x="38" y="17">BRIDGE</text></g>
-              <g transform="translate(194 245)"><rect width="72" height="29" rx="8"/><text x="36" y="12">MAP &amp; INFO</text><text x="36" y="23">BOOTH</text></g>
-            </g>
-            <g class="store-label diamonds-label" transform="translate(252 163) rotate(18)"><text x="28" y="0">DIAMONDS</text><text x="28" y="13">INTERNATIONAL</text></g>
-            <g class="store-label island-label" transform="translate(333 127) rotate(18)"><text x="27" y="0">ISLAND</text><text x="27" y="13">TREASURES</text></g>
-            <path class="route-halo" d="M199 179C219 195 231 207 248 215c18 9 45 16 59 3 15-14 9-31-2-41-11-10-18-17-8-25 8-7 21-5 34 0l27 9" />
-            <path class="route-line" marker-end="url(#routeArrow)" d="M199 179C219 195 231 207 248 215c18 9 45 16 59 3 15-14 9-31-2-41-11-10-18-17-8-25 8-7 21-5 34 0l27 9" />
-            <g class="step-marker step-start" transform="translate(199 179)"><circle r="13"/><text y="4">1</text></g>
-            <g class="step-marker" transform="translate(278 221)"><circle r="13"/><text y="4">2</text></g>
-            <g class="step-marker step-finish" transform="translate(365 164)"><circle r="14"/><path d="M-6 0l4 4 8-9"/></g>
-            <g class="turn-callout" transform="translate(272 254)"><rect width="92" height="27" rx="8"/><text x="46" y="11">U-TURN INSIDE</text><text x="46" y="21">DIAMONDS</text></g>
-            <g class="north" transform="translate(387 22)"><path d="M0 22L9 0l9 22-9-5z"/><text x="9" y="33">N</text></g>
-          </svg>
-          <div class="map-legend"><span><i class="legend-route"></i>Recommended route</span><span><i class="legend-store"></i>Indoor shortcut</span></div>
-        </div>
-        <ol class="directions">
-          <li><b>1</b><span>From the map booth, walk about 10 meters.</span></li>
-          <li><b>2</b><span>Enter Diamonds International on your left and make the U-turn through the store.</span></li>
-          <li><b>3</b><span>Exit toward Island Treasures and ask its cashier for the Wi-Fi code.</span></li>
-        </ol>
-      </article>
-      <form id="wifiCodeForm" class="code-card">
-        <label for="wifiCode">Enter today’s Wi-Fi code</label>
-        <div><input id="wifiCode" autocomplete="one-time-code" autocapitalize="characters" placeholder="ENTER CODE" maxlength="20" /><button type="submit">Unlock</button></div>
-        <p class="code-help">Ask the Island Treasures cashier for today’s code.</p><p id="wifiCodeMessage" class="form-message" role="status"></p>
-      </form>
-    </section>
-
-    <section id="unlocked" class="screen unlocked">
-      <div class="success-icon">✓</div><p class="eyebrow">60 MINUTES UNLOCKED</p><h2>You’re back online!</h2>
-      <p class="lead">Your extended session is active. Before you continue exploring Cozumel, would you like to win a free souvenir?</p>
-      <div class="unlocked-promo"><img src="free-souvenir-teaser.png" alt="A colorful Cozumel treasure chest by the Caribbean Sea" /><div><strong>WIN A FREE SOUVENIR</strong><span>Complete three quick stops inside the plaza</span></div></div>
-      <div class="reward-preview"><div class="coin">★</div><div><span>OPTIONAL TREASURE QUEST</span><strong>Three codes. One prize.</strong><small>Start here, continue through Diamonds and finish downstairs at Island Booty.</small></div></div>
-      <button id="acceptQuest" class="primary" type="button">Yes, start the mission <b>→</b></button><button id="declineQuest" class="quiet" type="button">No thanks, continue with Wi-Fi</button>
-    </section>
-
-    <section id="declined" class="screen declined">
-      <div class="status-pill">● 60 MINUTES ACTIVE</div><h2>Enjoy Cozumel!</h2>
-      <p class="lead">Your internet remains active. You can return to the mission from this device while today’s session is available.</p>
-      <button id="changeMind" class="secondary" type="button">Start the Treasure Quest</button>
     </section>
 
     <section id="quest" class="screen quest">
       <div class="quest-progress"><span id="questStepLabel">MISSION 1 OF 3</span><div><i id="questProgress"></i></div></div>
       <article class="mission-card">
         <span id="missionBadge" class="mission-badge">STOP 1</span><p class="eyebrow" id="missionEyebrow">YOU ARE AT THE FIRST STOP</p>
-        <h2 id="missionTitle">Ask the Island Treasures cashier</h2><p id="missionCopy">Ask for the first Treasure Quest code. It is different from the Wi-Fi code.</p>
+        <h2 id="missionTitle">Ask the Island Treasures cashier</h2><p id="missionCopy">Ask for the first Treasure Quest code to unlock your next stop.</p>
         <div id="missionVisual" class="mission-visual stop-one" aria-hidden="true"><span class="visual-icon">★</span><strong>ISLAND TREASURES</strong><small>Temple of Fun</small></div>
         <div class="mission-route"><span>Current stop</span><b id="missionDestination">Island Treasures · cashier</b><em id="missionAction">Ask for code #1</em></div>
       </article>
@@ -133,8 +63,8 @@
     </section>
   </main>
 
-  <dialog id="termsDialog" class="legal-dialog"><button class="dialog-close" data-close type="button" aria-label="Close">×</button><h2>Guest Wi-Fi terms</h2><p>Complimentary access is temporary and subject to network availability. Do not use the service for unlawful, abusive or security-compromising activity. Access may be limited or suspended to protect the network.</p><p>The Treasure Quest is optional. Rewards are limited to one per person/device, require staff validation and are available only while supplies last. Final duration, participating locations and promotion validity are subject to confirmation by the operator.</p><small>Working version for operational and legal approval before launch.</small></dialog>
-  <dialog id="privacyDialog" class="legal-dialog"><button class="dialog-close" data-close type="button" aria-label="Close">×</button><h2>Privacy notice</h2><p>This web experience does not ask for your name, email or telephone number. It stores session progress, a random claim reference and claim status locally on this device so the experience can continue if the page reloads.</p><p>The Wi-Fi network operator may separately process technical connection data such as device/network identifiers, IP address and access times for security and operation. The operator’s final identity, contact details and rights-request procedure must be added before launch.</p><small>Working version for operational and legal approval before launch.</small></dialog>
-  <script src="app.js?v=4"></script>
+  <dialog id="termsDialog" class="legal-dialog"><button class="dialog-close" data-close type="button" aria-label="Close">×</button><h2>Treasure Quest terms</h2><p>Participation is optional and does not require a purchase. Complete the participating stops and present the live completion screen to Island Booty staff. Rewards are limited to one per person/device, require staff validation and are available only while supplies last.</p><p>Free Wi-Fi is a separate service managed by the venue and is not activated or controlled by this page.</p><small>Working version for operational and legal approval before launch.</small></dialog>
+  <dialog id="privacyDialog" class="legal-dialog"><button class="dialog-close" data-close type="button" aria-label="Close">×</button><h2>Privacy notice</h2><p>This experience does not request your name, email address or telephone number. It stores mission progress, a random claim reference and claim status locally on this device so the experience can continue if the page reloads.</p><p>The QR/NFC link only opens this web experience. It does not connect your device to Wi-Fi or read information from your phone.</p><small>Working version for operational and legal approval before launch.</small></dialog>
+  <script src="app.js?v=5"></script>
 </body>
 </html>

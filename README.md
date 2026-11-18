@@ -1,35 +1,37 @@
-# Island Treasures Wi-Fi Quest
+# Island Treasures Treasure Quest
 
-Mobile web experience for guests arriving at Punta Langosta, Cozumel.
+Mobile web experience opened voluntarily from an official Island Treasures QR/NFC piece at Plaza Punta Langosta, Cozumel.
 
-## Visitor flow
+## Two separate visitor flows
 
-1. Accept the Wi-Fi terms and receive 10 complimentary minutes.
-2. Follow the 1½-minute shortcut through Diamonds International to Island Treasures.
-3. Obtain the Wi-Fi code at Island Treasures and unlock the extended session.
-4. Optionally complete three stops: Island Treasures, Diamonds International and Island Booty.
-5. Show the live completion screen at Island Booty and have staff mark the souvenir as claimed.
+### Free Wi-Fi
 
-Progress and claim status persist on the visitor's device. Operational codes are validated by hashes and are not printed in the interface or documentation.
+1. A promoter at the cruise arrival area advertises free Wi-Fi and directs visitors to Island Treasures.
+2. Island Treasures staff provides the venue's Wi-Fi access instructions or code.
+3. The venue and its network administrator manage the connection. This website does not redirect, authenticate or authorize Wi-Fi devices.
 
-## Test mode
+### Treasure Quest
 
-Append `?demo=1` to the URL to shorten the first session to 20 seconds and display the QA skip control. The normal URL uses the full 10-minute timer.
+1. At Island Treasures, a staff member presents a reusable 3D-printed QR/NFC piece.
+2. The visitor taps or scans it to open this website, then returns the piece immediately.
+3. The visitor enters one code at Island Treasures, a second at Diamonds International and a final code at Island Booty.
+4. The live completion screen is shown at Island Booty and staff marks the souvenir as claimed.
 
-## UniFi captive-portal integration
+The QR and NFC should contain the same public URL:
 
-The production build expects the page and the network services to share the same domain:
+`https://pmscorporation.github.io/island-treasures-quest/`
 
-- `POST /api/free` with no parameters activates the complimentary 10-minute session.
-- `POST /api/code` with JSON `{ "code": "XXXX" }` validates the cashier code and activates 60 minutes.
-- A successful response is `{ "ok": true, "minutes": 10|60 }`.
-- Supported errors are `invalid_code`, `already_used`, `expired` and `rate_limited`.
+## Technical behavior
 
-On localhost, GitHub Pages and URLs containing `?demo=1`, the interface stays in preview mode and does not call the production services. This keeps the public prototype usable while the same files remain ready to be hosted on the captive-portal server.
+- Static HTML, CSS and JavaScript; no backend is required for the prototype.
+- No automatic captive-portal redirect and no calls to the Wi-Fi controller.
+- No personal data is requested.
+- Mission progress and claim status are stored only in the visitor's browser.
+- Operational mission codes are validated by hashes and are not printed in the interface or documentation.
 
 ## Before launch
 
-- Deliver this complete folder to the network administrator for same-domain hosting and a controlled UniFi test.
-- Replace the working legal text with the approved company identity, privacy contact and promotion validity/stock.
-- Confirm final operational codes and rotate them before public launch.
-- Test on the actual Wi-Fi network and on current iPhone and Android devices.
+- Confirm the three participating stores and operational codes.
+- Approve the promotion terms, reward inventory and validity period.
+- Test the QR and NFC URL on current iPhone and Android devices.
+- Keep the reusable QR/NFC piece at the counter or attached to a lanyard so visitors scan it without taking it away.
